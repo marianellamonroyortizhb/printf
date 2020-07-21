@@ -46,5 +46,5 @@ int _printf(const char *format, ...)
 	new_pointer[buff_cou] = '\0';		/* setting end character */
 	write(STDOUT, new_pointer, strlen(new_pointer));/* salida del buffer */
 	va_end(list);
-	return (0);
+	return (strlen(new_pointer));
 }
