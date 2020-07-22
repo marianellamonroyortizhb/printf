@@ -1,6 +1,8 @@
 #include "holberton.h"
 #include <stdarg.h>
 #define STDOUT 1
+
+int subc(char *new_pointer, va_list list, int buff_cou);
 /**
 * _printf - prints a string like output according to a format.
 * @format: Is a character string, it is composed of zero or more directives.
@@ -10,7 +12,7 @@
 */
 int _printf(const char *format, ...)
 {
-	int counter = 0, buff_cou = 0, i, z_c;
+	int counter = 0, buff_cou = 0, i;
 	char new_pointer[1024];
 	char *value = NULL;
 	va_list list;
@@ -30,9 +32,7 @@ int _printf(const char *format, ...)
 			}
 			if (format[counter] == 'c')
 			{
-				z_c = va_arg(list, int);
-				if (z_c != 0)
-					new_pointer[buff_cou] = z_c, buff_cou++;/*Cambiando % por char_p */
+				buff_cou = subc(new_pointer, list, buff_cou);
 			}
 			if (format[counter] == '%')
 			{
@@ -49,3 +49,14 @@ int _printf(const char *format, ...)
 	va_end(list);
 	return (strlen(new_pointer));
 }
+
+int subc(char *new_pointer, va_list list, int buff_cou)
+{
+	int z_c;
+
+	z_c = va_arg(list, int);
+	if (z_c != 0)
+	new_pointer[buff_cou] = z_c, buff_cou++;/*Cambiando % por char_p */
+	return (buff_cou++);
+}
+
