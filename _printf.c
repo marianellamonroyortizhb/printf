@@ -3,6 +3,7 @@
 #define STDOUT 1
 
 int subc(char *new_pointer, va_list list, int buff_cou);
+int subs(char *new_pointer, va_list list, int buff_cou);
 /**
 * _printf - prints a string like output according to a format.
 * @format: Is a character string, it is composed of zero or more directives.
@@ -12,9 +13,8 @@ int subc(char *new_pointer, va_list list, int buff_cou);
 */
 int _printf(const char *format, ...)
 {
-	int counter = 0, buff_cou = 0, i;
+	int counter = 0, buff_cou = 0;
 	char new_pointer[1024];
-	char *value = NULL;
 	va_list list;
 
 	va_start(list, format);
@@ -26,9 +26,7 @@ int _printf(const char *format, ...)
 		counter++;
 			if (format[counter] == 's')
 			{
-				value = va_arg(list, char *);
-				for (i = 0; value != NULL && value[i]; i++, buff_cou++)
-				new_pointer[buff_cou] = value[i];
+				buff_cou = subs(new_pointer, list, buff_cou);
 			}
 			if (format[counter] == 'c')
 			{
@@ -60,3 +58,13 @@ int subc(char *new_pointer, va_list list, int buff_cou)
 	return (buff_cou++);
 }
 
+int subs(char *new_pointer, va_list list, int buff_cou)
+{
+	char *value;
+	int i;
+
+	value = va_arg(list, char *);
+	for (i = 0; value != NULL && value[i]; i++, buff_cou++)
+	new_pointer[buff_cou] = value[i];
+	return (buff_cou);
+}
