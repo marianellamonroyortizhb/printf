@@ -1,5 +1,5 @@
 #include "holberton.h"
-#include <stdarg.h>
+
 #define STDOUT 1
 
 int subc(char *new_pointer, va_list list, int buff_cou);
@@ -34,6 +34,11 @@ int _printf(const char *format, ...)
 				break;
 			case '%':
 				new_pointer[buff_cou] = '%', buff_cou++;
+				break;
+			default:
+				counter--;
+				new_pointer[buff_cou] = '%';
+				new_pointer[buff_cou] = format[counter], buff_cou++;
 			}
 		}
 		else
@@ -46,7 +51,13 @@ int _printf(const char *format, ...)
 	va_end(list);
 	return (strlen(new_pointer));
 }
-
+/**
+* subc - substitute %c by the list element
+* @new_pointer: string to change
+* @list: va_list char to change
+* @buff_cou: index of dst where the c of %c is
+* Return: New index
+*/
 int subc(char *new_pointer, va_list list, int buff_cou)
 {
 	int z_c;
@@ -56,7 +67,15 @@ int subc(char *new_pointer, va_list list, int buff_cou)
 	new_pointer[buff_cou] = z_c, buff_cou++;/*Cambiando % por char_p */
 	return (buff_cou++);
 }
-
+/**
+* subs - prints a character.
+* @new_pointer: Is a character string,
+* it is composed of zero or more directives.
+* @list: string list of arguments.
+* @buff_cou: index of dst where the c of %c is
+* Description: _subs writes a character.
+* Return: The number of characters printed, avoiding the end null byte.
+*/
 int subs(char *new_pointer, va_list list, int buff_cou)
 {
 	char *value;

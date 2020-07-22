@@ -4,6 +4,8 @@
 #include <stdarg.h>	/* va_list, va_arg */
 #include <unistd.h>	/* write */
 #include <string.h>	/* strlen */
+#include <stdlib.h> /* NULL */
+#include <limits.h> /* unsigned*/
 
 int _printf(const char *format, ...);
 
