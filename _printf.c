@@ -10,15 +10,14 @@
 */
 int _printf(const char *format, ...)
 {
-	int counter = 0;
-	int buff_cou = 0;
+	int counter = 0, buff_cou = 0, i, z_c;
 	char new_pointer[1024];
-	int i;
 	char *value = NULL;
 	va_list list;
 
 	va_start(list, format);
-	for (counter = 0; format[counter] != '\0'; counter++)
+
+	for (counter = 0; format != NULL && format[counter] != '\0'; counter++)
 	{
 	if (format[counter] == '%')
 	{
@@ -26,24 +25,23 @@ int _printf(const char *format, ...)
 			if (format[counter] == 's')
 			{
 				value = va_arg(list, char *);
-				for (i = 0; value[i]; i++, buff_cou++)
+				for (i = 0; value != NULL && value[i]; i++, buff_cou++)
 				new_pointer[buff_cou] = value[i];
 			}
 			if (format[counter] == 'c')
 			{
-				new_pointer[buff_cou] = va_arg(list, int); /*Cambiando % por char_p */
-				buff_cou++;
+				z_c = va_arg(list, int);
+				if (z_c != 0)
+					new_pointer[buff_cou] = z_c, buff_cou++;/*Cambiando % por char_p */
 			}
 			if (format[counter] == '%')
 			{
-				new_pointer[buff_cou] = '%'; /*Cambiando % por %*/
-				buff_cou++;
+				new_pointer[buff_cou] = '%', buff_cou++;
 			}
 		}
 		else
 		{
-			new_pointer[buff_cou] = format[counter];
-			buff_cou++;
+			new_pointer[buff_cou] = format[counter], buff_cou++;
 		}
 	}
 	new_pointer[buff_cou] = '\0';		/* setting end character */
