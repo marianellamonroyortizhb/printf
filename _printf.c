@@ -64,8 +64,9 @@ int subc(char *new_pointer, va_list list, int buff_cou)
 
 	z_c = va_arg(list, int);
 	if (z_c != 0)
-	new_pointer[buff_cou] = z_c, buff_cou++;/*Cambiando % por char_p */
-	return (buff_cou++);
+		new_pointer[buff_cou] = z_c;
+	buff_cou++;/*Cambiando % por char_p */
+	return (buff_cou);
 }
 /**
 * subs - prints a character.
@@ -82,7 +83,9 @@ int subs(char *new_pointer, va_list list, int buff_cou)
 	int i;
 
 	value = va_arg(list, char *);
-	for (i = 0; value != NULL && value[i]; i++, buff_cou++)
+	if (value == NULL)
+		value = "(null)";
+	for (i = 0; value[i]; i++, buff_cou++)
 	new_pointer[buff_cou] = value[i];
 	return (buff_cou);
 }
