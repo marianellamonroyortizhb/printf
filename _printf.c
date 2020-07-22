@@ -21,19 +21,18 @@ int _printf(const char *format, ...)
 
 	for (counter = 0; format != NULL && format[counter] != '\0'; counter++)
 	{
-	if (format[counter] == '%')
-	{
-		counter++;
-			if (format[counter] == 's')
+		if (format[counter] == '%')
+		{
+			counter++;
+			switch (format[counter])
 			{
+			case 's':
 				buff_cou = subs(new_pointer, list, buff_cou);
-			}
-			if (format[counter] == 'c')
-			{
+				break;
+			case 'c':
 				buff_cou = subc(new_pointer, list, buff_cou);
-			}
-			if (format[counter] == '%')
-			{
+				break;
+			case '%':
 				new_pointer[buff_cou] = '%', buff_cou++;
 			}
 		}
