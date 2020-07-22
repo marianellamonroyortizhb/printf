@@ -10,16 +10,14 @@
 */
 int _printf(const char *format, ...)
 {
-	va_list list;
-
 	int counter = 0;
 	int buff_cou = 0;
 	char new_pointer[1024];
 	int i;
 	char *value = NULL;
+	va_list list;
 
 	va_start(list, format);
-
 	for (counter = 0; format[counter] != '\0'; counter++)
 	{
 	if (format[counter] == '%')
@@ -34,6 +32,11 @@ int _printf(const char *format, ...)
 			if (format[counter] == 'c')
 			{
 				new_pointer[buff_cou] = va_arg(list, int); /*Cambiando % por char_p */
+				buff_cou++;
+			}
+			if (format[counter] == '%')
+			{
+				new_pointer[buff_cou] = '%'; /*Cambiando % por %*/
 				buff_cou++;
 			}
 		}
