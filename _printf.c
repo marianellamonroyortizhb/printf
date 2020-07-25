@@ -53,7 +53,7 @@ int _printf(const char *format, ...)
 	new_pointer[buff_cou] = '\0';		/* setting end character */
 	write(STDOUT, new_pointer, strlen(new_pointer));/* salida del buffer */
 	va_end(list);
-	return (strlen(new_pointer));
+	return (buff_cou);
 }
 /**
 * subc - substitute %c by the list element
@@ -67,8 +67,7 @@ int subc(char *new_pointer, va_list list, int buff_cou)
 	int z_c;
 
 	z_c = va_arg(list, int);
-	if (z_c != '\0')
-		new_pointer[buff_cou] = z_c;
+	new_pointer[buff_cou] = z_c;
 	buff_cou++;
 	return (buff_cou);
 }
