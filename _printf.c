@@ -19,6 +19,8 @@ int _printf(const char *format, ...)
 
 	va_start(list, format);
 
+	if (format == NULL)
+		return (-1);
 	for (counter = 0; format != NULL && format[counter] != '\0'; counter++)
 	{
 		if (format[counter] == '%')
@@ -63,7 +65,7 @@ int subc(char *new_pointer, va_list list, int buff_cou)
 	int z_c;
 
 	z_c = va_arg(list, int);
-	if (z_c != 0)
+	if (z_c != '\0')
 		new_pointer[buff_cou] = z_c;
 	buff_cou++;/*Cambiando % por char_p */
 	return (buff_cou);
