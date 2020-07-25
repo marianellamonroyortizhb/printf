@@ -51,7 +51,7 @@ int _printf(const char *format, ...)
 		}
 	}
 	new_pointer[buff_cou] = '\0';		/* setting end character */
-	write(STDOUT, new_pointer, strlen(new_pointer));/* salida del buffer */
+	write(STDOUT, new_pointer, buff_cou);/* salida del buffer */
 	va_end(list);
 	return (buff_cou);
 }
