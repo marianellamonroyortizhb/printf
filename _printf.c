@@ -37,6 +37,8 @@ int _printf(const char *format, ...)
 			case '%':
 				new_pointer[buff_cou] = '%', buff_cou++;
 				break;
+			case '\0':
+				return (-1);
 			default:
 				counter--;
 				new_pointer[buff_cou] = '%';
@@ -67,7 +69,7 @@ int subc(char *new_pointer, va_list list, int buff_cou)
 	z_c = va_arg(list, int);
 	if (z_c != '\0')
 		new_pointer[buff_cou] = z_c;
-	buff_cou++;/*Cambiando % por char_p */
+	buff_cou++;
 	return (buff_cou);
 }
 /**
