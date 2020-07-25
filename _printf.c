@@ -14,7 +14,7 @@ int subs(char *new_pointer, va_list list, int buff_cou);
 int _printf(const char *format, ...)
 {
 	int counter = 0, buff_cou = 0;
-	char new_pointer[1024];
+	char new_pointer[2048];
 	va_list list;
 
 	va_start(list, format);
