@@ -144,12 +144,19 @@ int subs(char *new_pointer, va_list list, int buff_cou)
 		new_pointer[buff_cou] = value[i];
 	return (buff_cou);
 }
+/**
+ * subb - substitute %b by argument number in binary
+ * @new_pointer: string to change
+ * @list: va_list char to change
+ * @buff_cou: index of dst where the c of %c is
+ * Return: New index
+ */
 int subb(char *new_pointer, va_list list, int buff_cou)
 {
 	int tens = 1;
 	unsigned int tmp;
 	int number;
-	unsigned int base = 2; 
+	unsigned int base = 2;
 
 	number = va_arg(list, unsigned int);
 
