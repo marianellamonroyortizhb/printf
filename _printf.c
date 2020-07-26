@@ -199,7 +199,6 @@ int subr(char *new_pointer, va_list list, int buff_cou)
 			buff_cou++;
 			i--;
 		}
-		return (buff_cou);
 	}
-	return (0);
+	return (buff_cou);
 }
