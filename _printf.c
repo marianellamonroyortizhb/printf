@@ -6,6 +6,7 @@ int subc(char *new_pointer, va_list list, int buff_cou);
 int subs(char *new_pointer, va_list list, int buff_cou);
 int subi(char *new_pointer, va_list list, int buff_cou);
 int subb(char *new_pointer, va_list list, int buff_cou);
+int subr(char *new_pointer, va_list list, int buff_cou);
 /**
  * _printf - prints a string like output according to a format.
  * @format: Is a character string, it is composed of zero or more directives.
@@ -168,6 +169,31 @@ int subb(char *new_pointer, va_list list, int buff_cou)
 			new_pointer[buff_cou] = ('0' + bit);
 			buff_cou++;
 		}
+	}
+	return (buff_cou);
+}
+/**
+ * subr - substitute %r by argument number in binary
+ * @new_pointer: string to change
+ * @list: va_list char to change
+ * @buff_cou: index of dst where the c of %c is
+ * Return: New index
+ */
+int subr(char *new_pointer, va_list list, int buff_cou)
+{
+	int i;
+	char *s;
+
+	s = va_arg(list, char*);
+	i = 0;
+	while (s[i] != '\0')
+		i++;
+	i = i - 1;
+	while (i >= 0)
+	{
+		new_pointer[buff_cou] = s[i];
+		buff_cou++;
+		i--;
 	}
 	return (buff_cou);
 }
