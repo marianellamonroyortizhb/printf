@@ -1,5 +1,5 @@
 #include "holberton.h"
-
+#define INT_BITS (4 * 8)
 #define STDOUT 1
 
 int subc(char *new_pointer, va_list list, int buff_cou);
@@ -41,7 +41,7 @@ int _printf(const char *format, ...)
 					break;
 				case 'b':
 					buff_cou = subb(new_pointer, list, buff_cou);
-				break;
+					break;
 				case '%':
 					new_pointer[buff_cou] = '%', buff_cou++;
 					break;
@@ -153,33 +153,21 @@ int subs(char *new_pointer, va_list list, int buff_cou)
  */
 int subb(char *new_pointer, va_list list, int buff_cou)
 {
-	int tens = 1;
-	unsigned int tmp;
-	int number;
-	unsigned int base = 2;
+	unsigned int bit, number;
+	int MSB = 0;
+	int i;
 
 	number = va_arg(list, unsigned int);
-
-	tmp = number;
-	/* caso especial number = INT_MIN */
-	if (number == INT_MIN)
+	for (i = INT_BITS; i > 0; i--)
 	{
-		tmp++;
-	}
-	/* convertir tens en el 10^n maximo divisible entre number*/
-	while (tmp > base)
-	{
-		tens = tens * base;
-		tmp = tmp / base;
-	}
-
-	tmp = number;
-	while (tens > 0)
-	{
-		new_pointer[buff_cou] = ('0' + tmp / tens);
-		buff_cou++;
-		tmp %= tens;
-		tens /= base;
+		bit = number >> (i - 1); /* delete rigth bits of bit */
+		bit = bit & 1; /* delete left bits of bit */
+		MSB = MSB | bit;
+		if (MSB != 0 || i == 1) /* i == 1 to show b0 */
+		{
+			new_pointer[buff_cou] = ('0' + bit);
+			buff_cou++;
+		}
 	}
 	return (buff_cou);
 }
