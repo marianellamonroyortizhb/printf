@@ -5,6 +5,7 @@
 int subc(char *new_pointer, va_list list, int buff_cou);
 int subs(char *new_pointer, va_list list, int buff_cou);
 int subi(char *new_pointer, va_list list, int buff_cou);
+int subb(char *new_pointer, va_list list, int buff_cou);
 /**
  * _printf - prints a string like output according to a format.
  * @format: Is a character string, it is composed of zero or more directives.
@@ -38,6 +39,9 @@ int _printf(const char *format, ...)
 				case 'i': case 'd':
 					buff_cou = subi(new_pointer, list, buff_cou);
 					break;
+				case 'b':
+					buff_cou = subb(new_pointer, list, buff_cou);
+				break;
 				case '%':
 					new_pointer[buff_cou] = '%', buff_cou++;
 					break;
@@ -138,5 +142,37 @@ int subs(char *new_pointer, va_list list, int buff_cou)
 		value = "(null)";
 	for (i = 0; value[i]; i++, buff_cou++)
 		new_pointer[buff_cou] = value[i];
+	return (buff_cou);
+}
+int subb(char *new_pointer, va_list list, int buff_cou)
+{
+	int tens = 1;
+	unsigned int tmp;
+	int number;
+	unsigned int base = 2; 
+
+	number = va_arg(list, unsigned int);
+
+	tmp = number;
+	/* caso especial number = INT_MIN */
+	if (number == INT_MIN)
+	{
+		tmp++;
+	}
+	/* convertir tens en el 10^n maximo divisible entre number*/
+	while (tmp > base)
+	{
+		tens = tens * base;
+		tmp = tmp / base;
+	}
+
+	tmp = number;
+	while (tens > 0)
+	{
+		new_pointer[buff_cou] = ('0' + tmp / tens);
+		buff_cou++;
+		tmp %= tens;
+		tens /= base;
+	}
 	return (buff_cou);
 }
