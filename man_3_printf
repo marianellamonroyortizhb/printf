@@ -1,0 +1,17 @@
+.TH man 3 "04 Jul 2020" "0.1" "_printf linux programmer's manual"
+.SH NAME
+.B _printf
+- Prints a string like-you-see.
+.SH SYNOPSIS
+_printf FORMAT [ARGUMENTS]... 
+.SH DESCRIPTION
+Prints a string like-you-see.
+.SH OPTIONS
+.B _printf
+does not take any options.
+.SH SEE ALSO
+.I man (3) printf
+.SH BUGS
+No known bugs.
+.SH AUTHOR
+Gustavo Mejia, Marianella Monroy.
