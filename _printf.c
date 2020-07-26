@@ -43,6 +43,9 @@ int _printf(const char *format, ...)
 				case 'b':
 					buff_cou = subb(new_pointer, list, buff_cou);
 					break;
+				case 'r':
+					buff_cou = subr(new_pointer, list, buff_cou);
+					break;
 				case '%':
 					new_pointer[buff_cou] = '%', buff_cou++;
 					break;
@@ -181,19 +184,22 @@ int subb(char *new_pointer, va_list list, int buff_cou)
  */
 int subr(char *new_pointer, va_list list, int buff_cou)
 {
-	int i;
-	char *s;
+	int i = 0;
+	char *sr;
 
-	s = va_arg(list, char*);
-	i = 0;
-	while (s[i] != '\0')
-		i++;
-	i = i - 1;
-	while (i >= 0)
+	sr = va_arg(list, char*);
+	if (sr)
 	{
-		new_pointer[buff_cou] = s[i];
-		buff_cou++;
-		i--;
+		while (sr[i] != '\0')
+			i++;
+		i = i - 1;
+		while (i >= 0)
+		{
+			new_pointer[buff_cou] = sr[i];
+			buff_cou++;
+			i--;
+		}
+		return (buff_cou);
 	}
-	return (buff_cou);
+	return (0);
 }
