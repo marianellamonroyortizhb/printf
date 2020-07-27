@@ -1,11 +1,20 @@
-.TH man 3 "04 Jul 2020" "0.1" "_printf linux programmer's manual"
+.\" THIS IS THE MANUAL
+.TH PRINTF 3 "04 Jul 2020" "0.1" "Linux Programmer's Manual"
 .SH NAME
 .B _printf
-- Prints a string like-you-see.
+- print formatted ouput conversion
+
 .SH SYNOPSIS
-_printf FORMAT [ARGUMENTS]... 
+.B #include "holberton.h"
+
+.BI "int _printf(FORMAT [ARGUMENTS]...);"
+
 .SH DESCRIPTION
-Prints a string like-you-see.
+The function 
+.B _printf 
+prints a string like-you-see according to a
+.I format
+
 .SH OPTIONS
 .B _printf
 does not take any options.
