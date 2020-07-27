@@ -7,6 +7,7 @@ int subs(char *new_pointer, va_list list, int buff_cou);
 int subi(char *new_pointer, va_list list, int buff_cou);
 int subb(char *new_pointer, va_list list, int buff_cou);
 int subr(char *new_pointer, va_list list, int buff_cou);
+int subR13(char *new_pointer, va_list list, int buff_cou);
 /**
  * _printf - prints a string like output according to a format.
  * @format: Is a character string, it is composed of zero or more directives.
@@ -45,6 +46,9 @@ int _printf(const char *format, ...)
 					break;
 				case 'r':
 					buff_cou = subr(new_pointer, list, buff_cou);
+					break;
+				case 'R':
+					buff_cou = subR13(new_pointer, list, buff_cou);
 					break;
 				case '%':
 					new_pointer[buff_cou] = '%', buff_cou++;
@@ -199,6 +203,34 @@ int subr(char *new_pointer, va_list list, int buff_cou)
 			buff_cou++;
 			i--;
 		}
+	}
+	return (buff_cou);
+}
+/**
+ * subR13 - substitute %r by argument number in binary
+ * @new_pointer: string to change
+ * @list: va_list char to change
+ * @buff_cou: index of dst where the c of %c is
+ * Return: New index
+ */
+int subR13(char *new_pointer, va_list list, int buff_cou)
+{
+	char *str;
+	char *keysrc = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	char *keydst = "nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM";
+	int key_i, carry = 0;
+
+	str = va_arg(list, char*);
+	while (str[carry])
+	{
+		for (key_i = 0; keysrc[key_i]; key_i++)
+			if (str[carry] == keysrc[key_i])
+			{
+				new_pointer[buff_cou] = keydst[key_i];
+				buff_cou++;
+				break;
+			}
+		carry++;
 	}
 	return (buff_cou);
 }
