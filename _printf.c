@@ -224,12 +224,15 @@ int subR13(char *new_pointer, va_list list, int buff_cou)
 	while (str[carry])
 	{
 		for (key_i = 0; keysrc[key_i]; key_i++)
+		{
 			if (str[carry] == keysrc[key_i])
 			{
 				new_pointer[buff_cou] = keydst[key_i];
-				buff_cou++;
 				break;
 			}
+			new_pointer[buff_cou] = str[carry];
+		}
+		buff_cou++;
 		carry++;
 	}
 	return (buff_cou);
